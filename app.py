@@ -27,7 +27,7 @@ def montar_modulos(pasta_dados):
 def create_app(pasta_dados=None):
     pasta_dados = pasta_dados or os.environ.get("PASTA_DADOS", "data")
     app = Flask(__name__, template_folder=str(PASTA_TEMPLATES), static_folder=str(PASTA_ESTATICOS))
-    app.config["SECRET_KEY"] = "troque-esta-chave"
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "chave-de-desenvolvimento")
     app.add_template_filter(moeda, "moeda")
 
     modulos = montar_modulos(pasta_dados)

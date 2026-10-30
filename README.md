@@ -55,3 +55,14 @@ pip install -r requirements.txt
 pytest -v        # testes por módulo, web e de fronteiras
 python app.py    # http://localhost:5000
 ```
+
+## Deploy no Azure App Service
+
+A aplicação roda no Azure com Gunicorn (`wsgi.py`). Configurações usadas:
+
+| Configuração | Valor |
+|---|---|
+| Comando de inicialização | `gunicorn --bind=0.0.0.0 --timeout 600 wsgi:app` |
+| `PASTA_DADOS` | `/home/data` (pasta persistente do App Service) |
+| `SECRET_KEY` | uma chave secreta qualquer |
+| `SCM_DO_BUILD_DURING_DEPLOYMENT` | `true` (instala o `requirements.txt` no deploy) |
